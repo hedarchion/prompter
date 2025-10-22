@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Prompt Editor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>LLM Prompt Editor</h1>
+    <div class="header-actions">
+      <button id="addBtn">Add New Prompt</button>
+      <button id="exportBtn">Export JSON</button>
+      <input type="file" id="importFile" accept=".json" style="display: none;">
+      <button id="importBtn">Import JSON</button>
+      <button id="clearBtn">Clear All</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="search-filter">
+        <input type="text" id="searchInput" placeholder="Search by name or tags...">
+      </div>
+      <ul id="promptList"></ul>
+      <div id="noPrompts" class="no-prompts">
+        <p>No prompts yet. <button id="addFromSidebar">Add your first prompt!</button></p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div id="editor" class="editor" style="display: none;">
+        <h2 id="promptTitle"></h2>
+        <div id="tagsEditor"></div>
+
+        <section class="preview-section">
+          <h3>Interactive Preview</h3>
+          <div id="preview" class="prompt-preview"></div>
+        </section>
+
+        <section class="variables-section" style="display: none;">
+          <h3>Variables (Quick Edit)</h3>
+          <div id="variablesForm"></div>
+        </section>
+
+        <div class="actions">
+          <button id="previewFullBtn">Show Full Preview</button>
+          <textarea id="fullPreview" class="full-preview" readonly style="display: none;" placeholder="Full prompt will appear here..."></textarea>
+          <button id="copyBtn">Copy to Clipboard</button>
+          <button id="saveBtn">Save Changes</button>
+          <button id="deleteBtn" class="danger">Delete Prompt</button>
+        </div>
+      </div>
+
+      <div id="welcome" class="welcome">
+        <h2>Welcome to LLM Prompt Editor</h2>
+        <p>Create, edit, and copy prompts with fillable blanks. Add your first prompt to get started!</p>
+        <button id="addFromWelcome">Add New Prompt</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add New Modal -->
+  <div id="addModal" class="modal">
+    <div class="modal-content">
+      <h3>Add New Prompt</h3>
+      <form id="addForm">
+        <label>Name: <input type="text" id="promptName" required></label>
+        <label>Template (use {{var|default}}): <textarea id="templateText" rows="6" required placeholder="e.g., Write about {{topic}} in {{style|simple}} style."></textarea></label>
+        <label>Tags (comma-separated): <input type="text" id="newTags" placeholder="e.g., creative, education"></label>
+        <div class="modal-actions">
+          <button type="submit">Add Prompt</button>
+          <button type="button" id="cancelAdd">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
